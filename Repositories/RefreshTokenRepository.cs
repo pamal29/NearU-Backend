@@ -143,9 +143,9 @@ namespace NearU_Backend_Revised.Repositories
         {
             var now = DateTime.UtcNow;
 
-            // Delete tokens that are expired AND revoked (safe to delete)
+            // Delete all tokens that have expired
             var expiredTokens = await _context.RefreshTokens
-                .Where(rt => rt.ExpiryDate < now && rt.RevokedDate != null)
+                .Where(rt => rt.ExpiryDate < now)
                 .ToListAsync();
 
             if (!expiredTokens.Any())
