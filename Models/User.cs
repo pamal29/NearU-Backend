@@ -1,6 +1,11 @@
 ﻿namespace NearU_Backend_Revised.Models
 {
-    public class Usee
+    public class User
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Email { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
+        public string Role { get; set; } = "Student";
+        public DateTime CreateAt { get; set; } = DateTime.UtcNow;
     }
 }

@@ -2,5 +2,8 @@
 {
     public class RegisterRequest
     {
+        public string Email { get; set; } = string.empty;
+        public string Password { get; set; } = string.empty;
+        public string Role { get; set; } = "Student"
     }
 }
