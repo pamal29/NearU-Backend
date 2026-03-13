@@ -92,6 +92,9 @@ public async Task<bool> RevokeRefreshTokenAsync(string token, string? reason = n
             if (oldRefreshToken == null)
                 return null;
 
+            // Ensure the old token is still active (not revoked and not expired)
+            if (!oldRefreshToken.IsActive)
+                return null;
             // Revoke the old token
             oldRefreshToken.RevokedDate = DateTime.UtcNow;
             oldRefreshToken.ReplacedByToken = newRefreshToken.Token;
@@ -141,9 +144,9 @@ public async Task<bool> RevokeRefreshTokenAsync(string token, string? reason = n
         {
             var now = DateTime.UtcNow;
 
-            // Delete tokens that are expired AND revoked (safe to delete)
+            // Delete all tokens that have expired
             var expiredTokens = await _context.RefreshTokens
-                .Where(rt => rt.ExpiryDate < now && rt.RevokedDate != null)
+                .Where(rt => rt.ExpiryDate < now)
                 .ToListAsync();
 
             if (!expiredTokens.Any())
