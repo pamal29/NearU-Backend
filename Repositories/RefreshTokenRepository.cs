@@ -54,31 +54,32 @@ namespace NearU_Backend_Revised.Repositories
         {
             var now = DateTime.UtcNow;
             return await _context.RefreshTokens
-                .Where(rt => rt.UserId == userId 
-                    && rt.RevokedDate == null 
-                    && rt.ExpiryDate > now)
-                .OrderByDescending(rt => rt.CreatedDate)
-                .ToListAsync();
-        }
+        .Where(rt => rt.UserId == userId 
+            && rt.RevokedDate == null 
+            && rt.ExpiryDate > now)
+        .OrderByDescending(rt => rt.CreatedDate)
+        .ToListAsync();
+}
 
-        /// <summary>
-        /// Revoke a refresh token
-        /// </summary>
-        public async Task<bool> RevokeRefreshTokenAsync(string token, string? reason = null)
-        {
-            var refreshToken = await _context.RefreshTokens
-                .FirstOrDefaultAsync(rt => rt.Token == token);
+/// <summary>
+/// Revoke a refresh token
+/// </summary>
+public async Task<bool> RevokeRefreshTokenAsync(string token, string? reason = null)
+{
+    var refreshToken = await _context.RefreshTokens
+        .FirstOrDefaultAsync(rt => rt.Token == token);
 
-            if (refreshToken == null || refreshToken.IsRevoked)
-                return false;
+    if (refreshToken == null || refreshToken.IsRevoked)
+        return false;
 
-            refreshToken.RevokedDate = DateTime.UtcNow;
-            refreshToken.ReasonRevoked = reason ?? "Revoked without reason";
+    refreshToken.RevokedDate = DateTime.UtcNow;
+    refreshToken.ReasonRevoked = reason ?? "Revoked without reason";
 
-            await _context.SaveChangesAsync();
+    _context.RefreshTokens.Update(refreshToken);
+    await _context.SaveChangesAsync();
 
-            return true;
-        }
+    return true;
+}
 
         /// <summary>
         /// Replace a refresh token with a new one (used during token refresh)

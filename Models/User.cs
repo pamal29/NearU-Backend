@@ -5,7 +5,7 @@ namespace NearU_Backend_Revised.Models
     /// <summary>
     /// User entity representing application users
     /// </summary>
-    public class Usee
+    public class User
     {
         [Key]
         public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -22,12 +22,7 @@ namespace NearU_Backend_Revised.Models
         [Required]
         public string PasswordHash { get; set; } = string.Empty;
 
-        /// <summary>
-        /// User role: Student, Rider, Business, or Admin
-        /// </summary>
-        [Required]
-        [MaxLength(50)]
-        public string Role { get; set; } = UserRoles.Student; // Default role
+        public string Role { get; set; } = "Student";
 
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 

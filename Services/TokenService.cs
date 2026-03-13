@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NearU_Backend_Revised.Configuration;
 using NearU_Backend_Revised.Models;
@@ -25,7 +25,7 @@ namespace NearU_Backend_Revised.Services
         /// Generate a JWT access token for a user
         /// Includes claims: userId, email, username, role
         /// </summary>
-        public string GenerateAccessToken(Usee user)
+        public string GenerateAccessToken(User user)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));

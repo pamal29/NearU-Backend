@@ -14,7 +14,7 @@ namespace NearU_Backend_Revised.Data
         }
 
         // DbSets for entities
-        public DbSet<Usee> Users { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
         public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -60,7 +60,7 @@ namespace NearU_Backend_Revised.Data
             });
 
             // Configure User entity
-            modelBuilder.Entity<Usee>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(u => u.Id);
                 // Add other User configurations here as needed

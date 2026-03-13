@@ -22,7 +22,7 @@ namespace NearU_Backend_Revised.Examples
         /// </summary>
         public string GenerateStudentAccessToken()
         {
-            var student = new Usee
+            var student = new User
             {
                 Id = Guid.NewGuid().ToString(),
                 Username = "john_doe",
@@ -44,7 +44,7 @@ namespace NearU_Backend_Revised.Examples
         /// </summary>
         public string GenerateRiderAccessToken()
         {
-            var rider = new Usee
+            var rider = new User
             {
                 Id = Guid.NewGuid().ToString(),
                 Username = "delivery_rider",
@@ -62,7 +62,7 @@ namespace NearU_Backend_Revised.Examples
         /// </summary>
         public string GenerateBusinessAccessToken()
         {
-            var business = new Usee
+            var business = new User
             {
                 Id = Guid.NewGuid().ToString(),
                 Username = "local_restaurant",
@@ -80,7 +80,7 @@ namespace NearU_Backend_Revised.Examples
         /// </summary>
         public string GenerateAdminAccessToken()
         {
-            var admin = new Usee
+            var admin = new User
             {
                 Id = Guid.NewGuid().ToString(),
                 Username = "admin_user",
@@ -112,7 +112,7 @@ namespace NearU_Backend_Revised.Examples
         /// <summary>
         /// Example 6: Complete login flow (access + refresh tokens)
         /// </summary>
-        public (string accessToken, RefreshToken refreshToken) CompleteLoginFlow(Usee user)
+        public (string accessToken, RefreshToken refreshToken) CompleteLoginFlow(User user)
         {
             // Generate both tokens
             var accessToken = _tokenService.GenerateAccessToken(user);
@@ -152,7 +152,7 @@ namespace NearU_Backend_Revised.Examples
 
             foreach (var role in UserRoles.AllRoles)
             {
-                var user = new Usee
+                var user = new User
                 {
                     Id = Guid.NewGuid().ToString(),
                     Username = $"{role.ToLower()}_user",

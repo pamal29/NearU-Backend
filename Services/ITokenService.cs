@@ -12,7 +12,7 @@ namespace NearU_Backend_Revised.Services
         /// </summary>
         /// <param name="user">The user to generate token for</param>
         /// <returns>JWT token string</returns>
-        string GenerateAccessToken(Usee user);
+        string GenerateAccessToken(User user);
 
         /// <summary>
         /// Generate a secure refresh token
